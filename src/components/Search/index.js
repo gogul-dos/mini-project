@@ -145,7 +145,7 @@ class Search extends Component {
     switch (urlRequestStatus) {
       case this.requestStatus.progress:
         return (
-          <div className="loader-container">
+          <div className="loader-container" data-testid="loader">
             <Loader type="TailSpin" color="#4094ef" />
           </div>
         )

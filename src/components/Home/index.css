@@ -102,6 +102,7 @@
 }
 .username-link {
   text-decoration: none;
+  font-size: larger;
 }
 .post-dark-background {
   background-color: #000000;

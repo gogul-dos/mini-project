@@ -55,7 +55,10 @@ class UserProfile extends Component {
     switch (urlRequestStatus) {
       case this.requestStatus.progress:
         return (
-          <div className={`loader-container ${backgroundStyle}`}>
+          <div
+            className={`loader-container ${backgroundStyle}`}
+            data-testid="loader"
+          >
             <Loader type="TailSpin" color="#4094ef" />
           </div>
         )

@@ -105,7 +105,7 @@ class Home extends Component {
     switch (storyRequestStatus) {
       case this.requestStatus.progress:
         return (
-          <div className="loader-container-story">
+          <div className="loader-container-story" data-testid="loader">
             <Loader type="TailSpin" color="#4094ef" />
           </div>
         )
@@ -234,7 +234,7 @@ class Home extends Component {
     switch (urlRequestStatus) {
       case this.requestStatus.progress:
         return (
-          <div className="loader-container">
+          <div className="loader-container" data-testid="loader">
             <Loader type="TailSpin" color="#4094ef" />
           </div>
         )
@@ -290,7 +290,11 @@ class Home extends Component {
                     >
                       <BsHeart
                         color={`${iconColor}`}
-                        style={{marginRight: '10px'}}
+                        style={{
+                          marginRight: '10px',
+                          height: '20px',
+                          width: '20px',
+                        }}
                         onClick={() => this.postLiked(eachPost.postId)}
                       />
                     </button>
@@ -303,13 +307,21 @@ class Home extends Component {
                       className="like-button"
                     >
                       <FcLike
-                        style={{marginRight: '10px'}}
+                        style={{
+                          marginRight: '10px',
+                          height: '20px',
+                          width: '20px',
+                        }}
                         onClick={() => this.postUnLiked(eachPost.postId)}
                       />
                     </button>
                   )}
-                  <FaRegComment style={{marginRight: '10px'}} />
-                  <BiShareAlt style={{marginRight: '10px'}} />
+                  <FaRegComment
+                    style={{marginRight: '10px', height: '20px', width: '20px'}}
+                  />
+                  <BiShareAlt
+                    style={{marginRight: '10px', height: '20px', width: '20px'}}
+                  />
                 </div>
                 <p style={{fontWeight: 'bold'}}>{eachPost.likesCount} likes</p>
                 <p>{eachPost.postDetails.caption}</p>

@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import {BsGrid3X3} from 'react-icons/bs'
+import {BiCamera} from 'react-icons/bi'
 import ThemeContext from '../../Contexts'
 import Header from '../Header'
 import './index.css'
@@ -52,7 +53,10 @@ class Profile extends Component {
     switch (urlRequestStatus) {
       case this.requestStatus.progress:
         return (
-          <div className={`loader-container ${backgroundStyle}`}>
+          <div
+            className={`loader-container ${backgroundStyle}`}
+            data-testid="loader"
+          >
             <Loader type="TailSpin" color="#4094ef" />
           </div>
         )
@@ -61,7 +65,7 @@ class Profile extends Component {
           <div className={`home-failure-container ${backgroundStyle}`}>
             <img
               src="https://res.cloudinary.com/djfbwkdh3/image/upload/v1705664465/alert-triangle_e49eqv.png"
-              alt="failure"
+              alt="failure view"
               className="failure-image"
             />
             <h1>Something went wrong. Please try again</h1>
@@ -95,15 +99,13 @@ class Profile extends Component {
                 <div style={{display: 'flex', alignItems: 'center'}}>
                   <p>
                     <span style={{fontWeight: 'bold'}}>
-                      {' '}
-                      {urlResult.posts_count}{' '}
+                      {urlResult.posts_count}
                     </span>
                     posts
                   </p>
                   <p style={{marginLeft: '15px'}}>
                     <span style={{fontWeight: 'bold'}}>
-                      {' '}
-                      {urlResult.followers_count}{' '}
+                      {urlResult.followers_count}
                     </span>
                     followers
                   </p>
@@ -114,7 +116,7 @@ class Profile extends Component {
                     following
                   </p>
                 </div>
-                <p>{urlResult.user_name}</p>
+                <h1>{urlResult.user_name}</h1>
                 <p>{urlResult.user_bio}</p>
               </div>
             </div>
@@ -177,11 +179,8 @@ class Profile extends Component {
             </div>
             {urlResult.posts.length === 0 ? (
               <div className="no-post-container">
-                <img
-                  src="https://res.cloudinary.com/djfbwkdh3/image/upload/v1705726278/Group_7731_ln0xhd.png"
-                  alt="no post"
-                  className="no-posts-image"
-                />
+                <BiCamera className="my-post-image" />
+                <h1>No Posts</h1>
               </div>
             ) : (
               <ul className="unordered-my-post-list">

@@ -151,7 +151,9 @@ class Header extends Component {
                   type="button"
                   onClick={this.hamburgerButtonClicked}
                 >
-                  <GiHamburgerMenu style={{color: fontColor}} />
+                  <GiHamburgerMenu
+                    style={{color: fontColor, height: '30px', width: '30px'}}
+                  />
                 </button>
               </div>
               {isPortraitMenuOpen && (
