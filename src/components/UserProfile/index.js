@@ -6,7 +6,7 @@ import ThemeContext from '../../Contexts'
 import Header from '../Header'
 import './index.css'
 
-class Profile extends Component {
+class UserProfile extends Component {
   requestStatus = {
     progress: 'IN_PROGRESS',
     success: 'SUCCESS',
@@ -19,12 +19,15 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.getMyProfileResults()
+    this.getUserProfileResults()
   }
 
-  getMyProfileResults = async () => {
+  getUserProfileResults = async () => {
+    const {match} = this.props
+    const {params} = match
+    const userId = params.user_id
     this.setState({urlRequestStatus: this.requestStatus.progress})
-    const url = `https://apis.ccbp.in/insta-share/my-profile`
+    const url = `https://apis.ccbp.in/insta-share/users/${userId}`
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
@@ -34,16 +37,16 @@ class Profile extends Component {
     const data = await response.json()
     if (response.ok === true) {
       this.setState({
-        urlResult: data.profile,
+        urlResult: data.user_details,
         urlRequestStatus: this.requestStatus.success,
       })
-      console.log(data.profile)
+      console.log(data.user_details)
     } else {
       this.setState({urlRequestStatus: this.requestStatus.failure})
     }
   }
 
-  getMyProfileView = activeTheme => {
+  getUserProfileView = activeTheme => {
     const {urlRequestStatus, urlResult} = this.state
     const backgroundStyle =
       activeTheme === 'Dark'
@@ -80,8 +83,8 @@ class Profile extends Component {
             <div className="user-profile-landscape">
               <img
                 src={urlResult.profile_pic}
-                alt="my profile"
-                className="my-profile-image"
+                alt="user profile"
+                className="my-profile-image user-profile-image"
               />
               <div
                 style={{
@@ -130,8 +133,8 @@ class Profile extends Component {
                 <div style={{display: 'flex', alignItems: 'center'}}>
                   <img
                     src={urlResult.profile_pic}
-                    alt="my profile"
-                    className="my-profile-image"
+                    alt="user profile"
+                    className="my-profile-image user-profile-image"
                   />
                   <p style={{marginLeft: '15px'}}>
                     <span style={{fontWeight: 'bold'}}>
@@ -164,7 +167,7 @@ class Profile extends Component {
                 <li key={eachStory.id} className="my-profile-story-list-item">
                   <img
                     src={eachStory.image}
-                    alt="my story"
+                    alt="user story"
                     className="my-profile-story-image"
                   />
                 </li>
@@ -189,7 +192,7 @@ class Profile extends Component {
                   <li key={eachPost.id} className="my-post-list-item">
                     <img
                       src={eachPost.image}
-                      alt="my post"
+                      alt="user post"
                       className="my-post-image"
                     />
                   </li>
@@ -211,7 +214,7 @@ class Profile extends Component {
           return (
             <div>
               <Header />
-              <div>{this.getMyProfileView(activeTheme)}</div>
+              <div>{this.getUserProfileView(activeTheme)}</div>
             </div>
           )
         }}
@@ -220,4 +223,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default UserProfile

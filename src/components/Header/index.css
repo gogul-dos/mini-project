@@ -1,10 +1,13 @@
-.navbar-container {
+.navbar-container-landscape {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
+}
+.navbar-container-portrait {
+  display: none;
 }
 .dark-navbar-container {
   background-color: #000000;
@@ -58,4 +61,26 @@
   color: #ffffff;
   margin-left: 15px;
   border-radius: 3px;
+}
+.hamburger-button {
+  background-color: transparent;
+  border-width: 0;
+}
+.portrait-links-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (orientation: portrait) {
+  .navbar-container-portrait {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .navbar-container-landscape {
+    display: none;
+  }
 }

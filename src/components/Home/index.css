@@ -1,9 +1,10 @@
 .main-home-container {
   display: flex;
   flex-direction: column;
+  margin-top: -30px;
 }
 .home-dark-container {
-  background-color: #0f0f0f;
+  background-color: #000000;
   color: #ebebeb;
 }
 .home-light-container {
@@ -75,6 +76,11 @@
     padding: 25px;
     width: 100%;
     align-self: center;
+  }
+  .main-home-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
   }
   .slider-container-landscape {
     display: none;

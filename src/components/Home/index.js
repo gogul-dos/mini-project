@@ -224,7 +224,7 @@ class Home extends Component {
     }
   }
 
-  getCorrespondingView = activeTheme => {
+  getCorrespondingView = (activeTheme, changeCurrentTab) => {
     const {urlRequestStatus, urlResult} = this.state
     const fontColor = activeTheme === 'Dark' ? 'dark-color' : 'light-color'
     const iconColor = activeTheme === 'Dark' ? '#ffffff' : '#000000'
@@ -267,7 +267,11 @@ class Home extends Component {
                     alt="post author profile"
                     className="user-profile-image"
                   />
-                  <Link to="/" className={`username-link ${fontColor}`}>
+                  <Link
+                    to={`/user-profile/${eachPost.userId}`}
+                    className={`username-link ${fontColor}`}
+                    onClick={() => changeCurrentTab('userProfile')}
+                  >
                     {eachPost.userName}
                   </Link>
                 </div>
@@ -333,7 +337,7 @@ class Home extends Component {
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {activeTheme} = value
+          const {activeTheme, changeCurrentTab} = value
           const backgroundTheme =
             activeTheme === 'Dark'
               ? 'home-dark-container'
@@ -343,7 +347,7 @@ class Home extends Component {
               <Header />
               <div className={`main-home-container ${backgroundTheme}`}>
                 {this.getStoryView(activeTheme)}
-                {this.getCorrespondingView(activeTheme)}
+                {this.getCorrespondingView(activeTheme, changeCurrentTab)}
               </div>
             </div>
           )
