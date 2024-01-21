@@ -70,7 +70,7 @@
 .light-color {
   color: #000000;
 }
-@media (orientation: portrait) {
+@media (max-width: 768px) {
   .slider-container-portrait {
     display: block;
     padding: 25px;

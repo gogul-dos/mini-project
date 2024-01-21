@@ -58,7 +58,7 @@
   color: #ffffff;
 }
 
-@media (orientation: portrait) {
+@media (max-width: 768px) {
   .login-image {
     display: none;
   }

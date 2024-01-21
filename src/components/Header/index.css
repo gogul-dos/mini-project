@@ -71,7 +71,7 @@
   align-items: center;
   justify-content: center;
 }
-@media (orientation: portrait) {
+@media (max-width: 768px) {
   .navbar-container-portrait {
     display: flex;
     flex-direction: row;

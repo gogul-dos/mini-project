@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 import {BsHeart} from 'react-icons/bs'
 import {FcLike} from 'react-icons/fc'
-import {FaRegComment} from 'react-icons/fa'
+import {FaRegComment, FaSearch} from 'react-icons/fa'
+import {GrSearchAdvanced} from 'react-icons/gr'
 import {BiShareAlt} from 'react-icons/bi'
 import ThemeContext from '../../Contexts'
 import Header from '../Header'
@@ -21,6 +22,8 @@ class Search extends Component {
     urlRequestStatus: this.requestStatus.progress,
     urlResult: [],
     searchInput: '',
+    portraitSearchInput: '',
+    searchButtonClicked: 0,
   }
 
   componentDidMount() {
@@ -135,7 +138,7 @@ class Search extends Component {
     }
   }
 
-  getCorrespondingView = (activeTheme, changeCurrentTab) => {
+  getCorrespondingLandscapeView = (activeTheme, changeCurrentTab) => {
     const {urlRequestStatus, urlResult} = this.state
     const fontColor = activeTheme === 'Dark' ? 'dark-color' : 'light-color'
     const iconColor = activeTheme === 'Dark' ? '#ffffff' : '#000000'
@@ -265,17 +268,71 @@ class Search extends Component {
     }
   }
 
+  inputChangedPortrait = () => {
+    const input = document.getElementById('portraitSearch').value
+    const {searchButtonClicked} = this.state
+    this.setState({
+      portraitSearchInput: input,
+      searchButtonClicked: searchButtonClicked + 1,
+    })
+    this.getSearchResults(input)
+  }
+
   render() {
+    const {portraitSearchInput, searchButtonClicked} = this.state
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {activeTheme} = value
+          const {activeTheme, changeCurrentTab, changeSearchInput} = value
           return (
-            <div>
-              <Header />
-              <h1 style={{marginLeft: '15px'}}>Search Results</h1>
-              {this.getCorrespondingView(activeTheme)}
-            </div>
+            <>
+              <div className="search-container-landscape">
+                <Header />
+                <h1 style={{marginLeft: '15px'}}>Search Results</h1>
+                {this.getCorrespondingLandscapeView(activeTheme)}
+              </div>
+              <div className="search-container-portrait">
+                <Header />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <div style={{display: 'flex', alignItems: 'center'}}>
+                    <input
+                      type="search"
+                      className="search-element"
+                      placeholder="Search Caption"
+                      id="portraitSearch"
+                    />
+                    <Link to="/search">
+                      <button
+                        type="button"
+                        label="search"
+                        className="search-icon-container"
+                        onClick={() => {
+                          changeCurrentTab('Search')
+                          changeSearchInput(portraitSearchInput)
+                          this.inputChangedPortrait()
+                        }}
+                      >
+                        <FaSearch style={{height: '15px', width: '15px'}} />
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+                {portraitSearchInput === '' && searchButtonClicked === 0 ? (
+                  <div className="portrait-search-default-container">
+                    <GrSearchAdvanced />
+                    <p>Search Results will be appear here</p>
+                  </div>
+                ) : (
+                  <div>{this.getCorrespondingLandscapeView(activeTheme)}</div>
+                )}
+              </div>
+            </>
           )
         }}
       </ThemeContext.Consumer>

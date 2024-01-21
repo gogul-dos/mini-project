@@ -159,10 +159,28 @@ class Header extends Component {
               {isPortraitMenuOpen && (
                 <div className="portrait-links-container">
                   <Link
+                    to="/search"
+                    onClick={() => {
+                      changeCurrentTab('Search')
+                      this.hamburgerButtonClicked()
+                    }}
+                    style={{
+                      color: currentTab === 'Search' ? '#4094ef' : '',
+                      fontWeight: currentTab === 'Search' ? 'Bold' : '',
+                    }}
+                    className={`link-item ${backgroundColor}`}
+                  >
+                    Search
+                  </Link>
+                  <Link
                     to="/"
                     onClick={() => {
                       changeCurrentTab('Home')
                       this.hamburgerButtonClicked()
+                    }}
+                    style={{
+                      color: currentTab === 'Home' ? '#4094ef' : '',
+                      fontWeight: currentTab === 'Home' ? 'Bold' : '',
                     }}
                     className={`link-item ${backgroundColor}`}
                   >
@@ -173,6 +191,10 @@ class Header extends Component {
                     onClick={() => {
                       changeCurrentTab('Profile')
                       this.hamburgerButtonClicked()
+                    }}
+                    style={{
+                      color: currentTab === 'Profile' ? '#4094ef' : '',
+                      fontWeight: currentTab === 'Profile' ? 'Bold' : '',
                     }}
                     className={`link-item ${backgroundColor}`}
                   >
