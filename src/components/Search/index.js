@@ -271,10 +271,17 @@ class Search extends Component {
   inputChangedPortrait = () => {
     const input = document.getElementById('portraitSearch').value
     const {searchButtonClicked} = this.state
-    this.setState({
-      portraitSearchInput: input,
-      searchButtonClicked: searchButtonClicked + 1,
-    })
+    if (input === '') {
+      this.setState({
+        portraitSearchInput: input,
+        searchButtonClicked: 0,
+      })
+    } else {
+      this.setState({
+        portraitSearchInput: input,
+        searchButtonClicked: searchButtonClicked + 1,
+      })
+    }
     this.getSearchResults(input)
   }
 
